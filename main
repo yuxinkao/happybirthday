@@ -1,0 +1,45 @@
+"""
+Created on Tue Dec  7 17:39:08 2021
+@author: Yu Xin
+"""
+from flask import Flask
+app = Flask(__name__)
+
+import json
+import os
+from flask import request,abort,render_template
+from flask_sqlalchemy import SQLAlchemy
+from linebot import LineBotApi,WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent,TextMessage,TextSendMessage,ConfirmTemplate,FlexSendMessage
+from linebot.models import TemplateSendMessage,ButtonsTemplate,MessageTemplateAction
+from linebot.models import URITemplateAction,PostbackTemplateAction,PostbackEvent,PostbackAction
+from urllib.parse import parse_qsl
+from json import load
+
+
+#LINE Bot Channel Secret 及 Access Token
+line_bot_api=LineBotApi('f9JJOsMIyUVxqPt1lw/7xPRJO0s/59r9Wu45kbLpAG1cBhB8Dr2aw8+klpAK9QQp3MUfO5XvVfgWd4oQNJSrVEwrdGclaVHXhgjIVIs8/VUvO9Tr9pE7MF0A3NsLdW210sBNC72WqY/zS5l46aho3QdB04t89/1O/w1cDnyilFU=')
+handler=WebhookHandler('6a433893f79188f1dfaa583bb4a700ca')
+
+@app.route("/callback", methods=['POST'])
+def callback():
+    signature = request.headers['X-Line-Signature']
+    body = request.get_data(as_text=True)
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
+    return 'OK'
+    
+@handler.add(MessageEvent, message=TextMessage)
+def mainapp(event):
+        if mtext=='第一個小禮物':
+              message=TextSendMessage(
+                text='撰寫中~'
+                )
+        line_bot_api.reply_message(event.reply_token, message)
+        
+if __name__ == '__main__':
+          port=int(os.environ.get("PORT", 5000))
+          app.run(host='0.0.0.0',port=port)
