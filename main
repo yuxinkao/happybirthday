@@ -19,8 +19,8 @@ from json import load
 
 
 #LINE Bot Channel Secret 及 Access Token
-line_bot_api=LineBotApi('f9JJOsMIyUVxqPt1lw/7xPRJO0s/59r9Wu45kbLpAG1cBhB8Dr2aw8+klpAK9QQp3MUfO5XvVfgWd4oQNJSrVEwrdGclaVHXhgjIVIs8/VUvO9Tr9pE7MF0A3NsLdW210sBNC72WqY/zS5l46aho3QdB04t89/1O/w1cDnyilFU=')
-handler=WebhookHandler('6a433893f79188f1dfaa583bb4a700ca')
+line_bot_api=LineBotApi('zuO+PNi99BKYAHAAQsPbWw14t52buKbPcKW+5AZv1o/ZEgxTCmISsx/0P/mMuzThuf23NeXee9pjGGvM64FMj8VkjmhWf2e7OnQFZnEPnEwKj53uU5liO1x+v8cPIVuVBznK8kSbFjmmqyT+9p9xuwdB04t89/1O/w1cDnyilFU=')
+handler=WebhookHandler('24f12516769f2410ba45123cc1fafba7')    ##以更正
 
 @app.route("/callback", methods=['POST'])
 def callback():
